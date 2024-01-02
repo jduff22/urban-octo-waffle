@@ -1,0 +1,127 @@
+theia@theiadocker-jduff22:/home/project$ wget https://archive.apache.org/dist/spark/spark-3.3.3/spark-3.3.3-bin-hadoop3.tgz && tar xf spark-3.3.3-bin-hadoop3.tgz && rm -rf spark-3.3.3-bin-hadoop3.tgz``
+--2024-01-02 09:31:12--  https://archive.apache.org/dist/spark/spark-3.3.3/spark-3.3.3-bin-hadoop3.tgz
+Resolving archive.apache.org (archive.apache.org)... 65.108.204.189, 65.108.204.189
+Connecting to archive.apache.org (archive.apache.org)|65.108.204.189|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 299426263 (286M) [application/x-gzip]
+Saving to: 'spark-3.3.3-bin-hadoop3.tgz'
+
+spark-3.3.3-bin-hadoop3.tgz  100%[===========================================>] 285.55M  1.51MB/s    in 3m 11s  
+
+2024-01-02 09:34:23 (1.50 MB/s) - 'spark-3.3.3-bin-hadoop3.tgz' saved [299426263/299426263]
+
+theia@theiadocker-jduff22:/home/project$ export JAVA_HOME=/usr/lib/jvm/java-1.11.0-openjdk-amd64
+theia@theiadocker-jduff22:/home/project$ export SPARK_HOME=/home/project/spark-3.3.3-bin-hadoop3
+theia@theiadocker-jduff22:/home/project$ cd spark-3.3.3-bin-hadoop3
+theia@theiadocker-jduff22:/home/project/spark-3.3.3-bin-hadoop3$ python3 -m pip install pyspark findspark systemds
+Defaulting to user installation because normal site-packages is not writeable
+Requirement already satisfied: pyspark in /home/theia/.local/lib/python3.10/site-packages (3.5.0)
+Requirement already satisfied: findspark in /home/theia/.local/lib/python3.10/site-packages (2.0.1)
+Requirement already satisfied: systemds in /home/theia/.local/lib/python3.10/site-packages (3.1.0)
+Requirement already satisfied: py4j==0.10.9.7 in /home/theia/.local/lib/python3.10/site-packages (from pyspark) (0.10.9.7)
+Requirement already satisfied: pandas>=1.2.2 in /home/theia/.local/lib/python3.10/site-packages (from systemds) (2.1.4)
+Requirement already satisfied: numpy>=1.8.2 in /home/theia/.local/lib/python3.10/site-packages (from systemds) (1.26.2)
+Requirement already satisfied: requests>=2.24.0 in /home/theia/.local/lib/python3.10/site-packages (from systemds) (2.31.0)
+Requirement already satisfied: python-dateutil>=2.8.2 in /home/theia/.local/lib/python3.10/site-packages (from pandas>=1.2.2->systemds) (2.8.2)
+Requirement already satisfied: tzdata>=2022.1 in /home/theia/.local/lib/python3.10/site-packages (from pandas>=1.2.2->systemds) (2023.4)
+Requirement already satisfied: pytz>=2020.1 in /home/theia/.local/lib/python3.10/site-packages (from pandas>=1.2.2->systemds) (2023.3.post1)
+Requirement already satisfied: certifi>=2017.4.17 in /home/theia/.local/lib/python3.10/site-packages (from requests>=2.24.0->systemds) (2023.11.17)
+Requirement already satisfied: urllib3<3,>=1.21.1 in /home/theia/.local/lib/python3.10/site-packages (from requests>=2.24.0->systemds) (2.1.0)
+Requirement already satisfied: charset-normalizer<4,>=2 in /home/theia/.local/lib/python3.10/site-packages (from requests>=2.24.0->systemds) (3.3.2)
+Requirement already satisfied: idna<4,>=2.5 in /home/theia/.local/lib/python3.10/site-packages (from requests>=2.24.0->systemds) (3.6)
+Requirement already satisfied: six>=1.5 in /usr/lib/python3/dist-packages (from python-dateutil>=2.8.2->pandas>=1.2.2->systemds) (1.16.0)
+theia@theiadocker-jduff22:/home/project/spark-3.3.3-bin-hadoop3$ wget https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBMSkillsNetwork-SN0101EN-SkillsNetwork/labs/Week4_MLSP/shake.parquet
+--2024-01-02 09:36:17--  https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBMSkillsNetwork-SN0101EN-SkillsNetwork/labs/Week4_MLSP/shake.parquet
+Resolving cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud (cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud)... 169.63.118.104, 169.63.118.104
+Connecting to cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud (cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud)|169.63.118.104|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 74727 (73K) [binary/octet-stream]
+Saving to: 'shake.parquet.1'
+
+shake.parquet.1              100%[===========================================>]  72.98K  --.-KB/s    in 0.001s  
+
+2024-01-02 09:36:18 (53.7 MB/s) - 'shake.parquet.1' saved [74727/74727]
+
+theia@theiadocker-jduff22:/home/project/spark-3.3.3-bin-hadoop3$ wget https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBMSkillsNetwork-SN0101EN-SkillsNetwork/rklib.py
+--2024-01-02 09:36:28--  https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBMSkillsNetwork-SN0101EN-SkillsNetwork/rklib.py
+Resolving cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud (cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud)... 169.63.118.104, 169.63.118.104
+Connecting to cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud (cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud)|169.63.118.104|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 2597 (2.5K) [application/x-python]
+Saving to: 'rklib.py.1'
+
+rklib.py.1                   100%[===========================================>]   2.54K  --.-KB/s    in 0s      
+
+2024-01-02 09:36:28 (700 MB/s) - 'rklib.py.1' saved [2597/2597]
+
+theia@theiadocker-jduff22:/home/project/spark-3.3.3-bin-hadoop3$ wget https://raw.githubusercontent.com/ibm-developer-skills-network/Data-Engineering/main/Machine%20Learning%20with%20Signal%20Processing/Assignment.py
+--2024-01-02 09:36:37--  https://raw.githubusercontent.com/ibm-developer-skills-network/Data-Engineering/main/Machine%20Learning%20with%20Signal%20Processing/Assignment.py
+Resolving raw.githubusercontent.com (raw.githubusercontent.com)... 185.199.108.133, 185.199.109.133, 185.199.110.133, ...
+Connecting to raw.githubusercontent.com (raw.githubusercontent.com)|185.199.108.133|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 3207 (3.1K) [text/plain]
+Saving to: 'Assignment.py.1'
+
+Assignment.py.1              100%[===========================================>]   3.13K  --.-KB/s    in 0s      
+
+2024-01-02 09:36:37 (30.5 MB/s) - 'Assignment.py.1' saved [3207/3207]
+
+theia@theiadocker-jduff22:/home/project/spark-3.3.3-bin-hadoop3$ python3 Assignment.py
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+24/01/02 09:37:56 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
++-----+-----------+-----+-----+-----+                                           
+|CLASS|   SENSORID|    X|    Y|    Z|
++-----+-----------+-----+-----+-----+
+|    2|   pj123456|-0.03|-0.03|-0.03|
+|    2|   pj123456|-0.08|-0.08|-0.08|
+|    2|      gholi|  9.4|  9.4|  9.4|
+|    2|      gholi| 0.14| 0.14| 0.14|
+|    2|   qqqqqqqq|-0.45|-0.45|-0.45|
+|    2|  aUniqueID|-0.13|-0.13|-0.13|
+|    2|   bcbcbcbc| 2.14| 2.14| 2.14|
+|    2|      12345| 6.36| 6.36| 6.36|
+|    2|  aUniqueID|-5.17|-5.17|-5.17|
+|    2|   Qwertyui| 3.39| 3.39| 3.39|
+|    2|   Qwertyui|-0.16|-0.16|-0.16|
+|    2|      gholi|-1.31|-1.31|-1.31|
+|    2|   bcbcbcbc|-1.86|-1.86|-1.86|
+|    2|      12345| 1.65| 1.65| 1.65|
+|    2|   qqqqqqqq|-0.34|-0.34|-0.34|
+|    2|   pj123456|-0.09|-0.09|-0.09|
+|    2|98765498765|  9.7|  9.7|  9.7|
+|    2|    Bbbbbbb| 0.07| 0.07| 0.07|
+|    2|    Bbbbbbb|-0.07|-0.07|-0.07|
+|    2|    Bbbbbbb| 0.73| 0.73| 0.73|
++-----+-----------+-----+-----+-----+
+only showing top 20 rows
+
+SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+SLF4J: Defaulting to no-operation (NOP) logger implementation
+SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
+Traceback (most recent call last):
+  File "/home/project/spark-3.3.3-bin-hadoop3/Assignment.py", line 56, in <module>
+    df_class_0 = dft_systemds(x0,'x') \
+  File "/home/project/spark-3.3.3-bin-hadoop3/Assignment.py", line 29, in dft_systemds
+    size = len(signal)
+TypeError: object of type 'DataFrame' has no len()
+theia@theiadocker-jduff22:/home/project/spark-3.3.3-bin-hadoop3$ base64 a2_m4.json.zip > a2_m4.json.zip.base64
+base64: a2_m4.json.zip: No such file or directory
+theia@theiadocker-jduff22:/home/project/spark-3.3.3-bin-hadoop3$ wget https://raw.githubusercontent.com/ibm-developer-skills-network/Data-Engineering/main/Machine%20Learning%20with%20Signal%20Processing/Submission.py
+--2024-01-02 09:38:46--  https://raw.githubusercontent.com/ibm-developer-skills-network/Data-Engineering/main/Machine%20Learning%20with%20Signal%20Processing/Submission.py
+Resolving raw.githubusercontent.com (raw.githubusercontent.com)... 185.199.108.133, 185.199.109.133, 185.199.110.133, ...
+Connecting to raw.githubusercontent.com (raw.githubusercontent.com)|185.199.108.133|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 407 [text/plain]
+Saving to: 'Submission.py.1'
+
+Submission.py.1              100%[===========================================>]     407  --.-KB/s    in 0s      
+
+2024-01-02 09:38:46 (22.4 MB/s) - 'Submission.py.1' saved [407/407]
+
+theia@theiadocker-jduff22:/home/project/spark-3.3.3-bin-hadoop3$ python3 Submission.py
+Submission successful, please check on the coursera grader page for the status
+-------------------------
+{"elements":[{"itemId":"B8wXV","id":"f_F-qCtuEei_fRLwaVDk3g~B8wXV~5ZF9kal8Ee6nbBJe-jNHSw","courseId":"f_F-qCtuEei_fRLwaVDk3g"}],"paging":{},"linked":{}}
+-------------------------
+theia@theiadocker-jduff22:/home/project/spark-3.3.3-bin-hadoop3$ 
